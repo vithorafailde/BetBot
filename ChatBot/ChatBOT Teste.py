@@ -2038,12 +2038,11 @@ elif _page == "simulacao":
                     unsafe_allow_html=True,
                 )
                 st.markdown(
-                    f"O simulador rodou 1.000 situações diferentes e escolheu algumas para mostrar no gráfico. "
-                    f"Cada linha é uma dessas situações, ou seja, é como se você apostasse {_smr['n_bets']} vezes "
-                    f"seguidas, começando com R$ {_smr_bk:.2f}. "
-                    f"Linhas coloridas mostram as situações em que você ganhou dinheiro. "
-                    f"Linhas cinzas mostram situações em que você perdeu. "
-                    f"É importante destacar, que isso não é uma previsão, é só para mostrar o que pode acontecer em cada caminho possível."
+                    f"O simulador rodou 1.000 situações diferentes e escolheu algumas para mostrar no gráfico.\n\n"
+                    f"Cada linha é uma dessas situações — como se você apostasse {_smr['n_bets']} vezes seguidas, começando com R$ {_smr_bk:.2f}.\n\n"
+                    f"Linhas coloridas mostram as situações em que você ganhou dinheiro.\n\n"
+                    f"Linhas cinzas mostram situações em que você perdeu.\n\n"
+                    f"Isso não é uma previsão — é só para mostrar o que pode acontecer em cada caminho possível."
                 )
                 _win_colors = [
                     "#1a6641","#2196F3","#9C27B0","#FF6F00","#00838F",
