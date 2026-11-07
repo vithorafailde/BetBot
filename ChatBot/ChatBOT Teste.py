@@ -1942,17 +1942,17 @@ elif _page == "simulacao":
                 unsafe_allow_html=True,
             )
             _smr_delta = _smr["mean_gain"] - _smr["cdi_gain"]
-            _smr_delta_sign = "a mais" if _smr_delta >= 0 else "a menos"
+            _smr_delta_subtitle = "a mais do que no CDI" if _smr_delta >= 0 else "deixou de ganhar vs CDI"
             _smr_mean_color = "#1a6641" if _smr["mean_gain"] >= 0 else "rgba(160,40,40,0.85)"
             _smr_mean_bg = "#e8f5ee" if _smr["mean_gain"] >= 0 else "#fdf0f0"
             _smr_mean_border = "#1a6641" if _smr["mean_gain"] >= 0 else "rgba(160,40,40,0.5)"
             _smr_diff_color = "#1a6641" if _smr_delta >= 0 else "rgba(160,40,40,0.85)"
             _smr_diff_bg = "#e8f5ee" if _smr_delta >= 0 else "#fdf0f0"
             _smr_diff_border = "#1a6641" if _smr_delta >= 0 else "rgba(160,40,40,0.5)"
+            _card_style = "border-radius:8px;padding:14px 16px;min-height:110px;"
             c1, c2, c3 = st.columns(3)
             c1.markdown(
-                f"<div style='background:#f0f5f2;border-radius:8px;padding:14px 16px;"
-                f"border-left:3px solid #4b8068;height:100%;'>"
+                f"<div style='background:#f0f5f2;{_card_style}border-left:3px solid #4b8068;'>"
                 f"<div style='font-family:Rajdhani,sans-serif;font-size:0.9rem;font-weight:700;"
                 f"color:#1a3d2b;text-transform:uppercase;margin-bottom:6px;'>Total da Renda Fixa</div>"
                 f"<div style='font-family:Rajdhani,sans-serif;font-size:1.5rem;font-weight:700;"
@@ -1962,10 +1962,9 @@ elif _page == "simulacao":
                 unsafe_allow_html=True,
             )
             c2.markdown(
-                f"<div style='background:{_smr_mean_bg};border-radius:8px;padding:14px 16px;"
-                f"border-left:3px solid {_smr_mean_border};height:100%;'>"
+                f"<div style='background:{_smr_mean_bg};{_card_style}border-left:3px solid {_smr_mean_border};'>"
                 f"<div style='font-family:Rajdhani,sans-serif;font-size:0.9rem;font-weight:700;"
-                f"color:#1a3d2b;text-transform:uppercase;margin-bottom:6px;'>Resultado médio apostando</div>"
+                f"color:#1a3d2b;text-transform:uppercase;margin-bottom:6px;'>Ganho médio apostando</div>"
                 f"<div style='font-family:Rajdhani,sans-serif;font-size:1.5rem;font-weight:700;"
                 f"color:{_smr_mean_color};'>R$ {_smr['mean_gain']:+.2f}</div>"
                 f"<div style='font-family:Rajdhani,sans-serif;font-size:0.85rem;color:{_smr_mean_color};margin-top:3px;'>"
@@ -1973,14 +1972,13 @@ elif _page == "simulacao":
                 unsafe_allow_html=True,
             )
             c3.markdown(
-                f"<div style='background:{_smr_diff_bg};border-radius:8px;padding:14px 16px;"
-                f"border-left:3px solid {_smr_diff_border};height:100%;'>"
+                f"<div style='background:{_smr_diff_bg};{_card_style}border-left:3px solid {_smr_diff_border};'>"
                 f"<div style='font-family:Rajdhani,sans-serif;font-size:0.9rem;font-weight:700;"
                 f"color:#1a3d2b;text-transform:uppercase;margin-bottom:6px;'>Apostas vs Renda Fixa</div>"
                 f"<div style='font-family:Rajdhani,sans-serif;font-size:1.5rem;font-weight:700;"
                 f"color:{_smr_diff_color};'>R$ {abs(_smr_delta):.2f}</div>"
                 f"<div style='font-family:Rajdhani,sans-serif;font-size:0.85rem;color:{_smr_diff_color};margin-top:3px;'>"
-                f"{_smr_delta_sign} do que o CDI</div></div>",
+                f"{_smr_delta_subtitle}</div></div>",
                 unsafe_allow_html=True,
             )
 
