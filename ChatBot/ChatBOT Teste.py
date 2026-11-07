@@ -1836,10 +1836,11 @@ elif _page == "simulacao":
             _smr_best_sign  = "+" if _smr["best_gain"]  >= 0 else ""
             _smr_mean_sign  = "+" if _smr["mean_gain"]  >= 0 else ""
             _smr_worst_sign = "+" if _smr["worst_gain"] >= 0 else ""
-            def _mc_card(label, final, gain, sign):
+            def _mc_card(label, final, gain, sign, subtitle=None):
                 color = "#1a6641" if gain >= 0 else "rgba(160,40,40,0.85)"
                 bg    = "#e8f5ee" if gain >= 0 else "#fdf0f0"
                 border= "#1a6641" if gain >= 0 else "rgba(160,40,40,0.5)"
+                sub   = subtitle if subtitle else f"{sign}R$ {gain:.2f} vs. início"
                 return (
                     f"<div style='background:{bg};border-radius:8px;padding:14px 16px;"
                     f"border-left:3px solid {border};height:100%;'>"
@@ -1848,13 +1849,19 @@ elif _page == "simulacao":
                     f"<div style='font-family:Rajdhani,sans-serif;font-size:1.5rem;font-weight:700;"
                     f"color:#1a3d2b;'>R$ {final:.2f}</div>"
                     f"<div style='font-family:Rajdhani,sans-serif;font-size:0.85rem;color:{color};margin-top:3px;'>"
-                    f"{sign}R$ {gain:.2f} vs. início</div>"
+                    f"{sub}</div>"
                     f"</div>"
                 )
+            _worst_broke = _smr["worst_f"] == 0.0
             r1, r2, r3 = st.columns(3)
             r1.markdown(_mc_card("Melhor cenário", _smr["best_f"], _smr["best_gain"], _smr_best_sign), unsafe_allow_html=True)
             r2.markdown(_mc_card("Resultado mais provável", _smr["mean_f"], _smr["mean_gain"], _smr_mean_sign), unsafe_allow_html=True)
-            r3.markdown(_mc_card("Pior cenário", _smr["worst_f"], _smr["worst_gain"], _smr_worst_sign), unsafe_allow_html=True)
+            r3.markdown(_mc_card(
+                "Pior cenário",
+                _smr["worst_gain"] if _worst_broke else _smr["worst_f"],
+                _smr["worst_gain"], _smr_worst_sign,
+                subtitle="perdeu tudo" if _worst_broke else None,
+            ), unsafe_allow_html=True)
             st.markdown("<div style='margin-top:8px;'></div>", unsafe_allow_html=True)
             if _smr["pct_broke"] > 0:
                 st.warning(
