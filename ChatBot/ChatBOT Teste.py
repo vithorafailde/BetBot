@@ -1974,7 +1974,10 @@ elif _page == "simulacao":
             c3.markdown(
                 f"<div style='background:{_smr_diff_bg};{_card_style}border-left:3px solid {_smr_diff_border};'>"
                 f"<div style='font-family:Rajdhani,sans-serif;font-size:0.9rem;font-weight:700;"
-                f"color:#1a3d2b;text-transform:uppercase;margin-bottom:6px;'>Apostas vs Renda Fixa</div>"
+                f"color:#1a3d2b;text-transform:uppercase;margin-bottom:6px;'>Apostas vs Renda Fixa"
+                f"<span title='Diferença entre o ganho médio apostando e o rendimento do CDI. "
+                f"Quando negativo, mostra quanto você deixou de ganhar por não ter aplicado na renda fixa.' "
+                f"style='cursor:help;font-size:0.85rem;margin-left:5px;opacity:0.7;'>🔍</span></div>"
                 f"<div style='font-family:Rajdhani,sans-serif;font-size:1.5rem;font-weight:700;"
                 f"color:{_smr_diff_color};'>R$ {abs(_smr_delta):.2f}</div>"
                 f"<div style='font-family:Rajdhani,sans-serif;font-size:0.85rem;color:{_smr_diff_color};margin-top:3px;'>"
