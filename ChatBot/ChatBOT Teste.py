@@ -1779,12 +1779,17 @@ elif _page == "simulacao":
                 example_trajs: list[list[float]] = []
 
                 for sim_i in range(n_sims):
-                    wins    = rng.random(n_bets) < p
-                    changes = np.where(wins, lucro_win, -perda_lose)
-                    traj    = bankroll + np.cumsum(changes)
-                    all_finals.append(float(traj[-1]))
+                    bk = bankroll
+                    traj = [bk]
+                    for w in (rng.random(n_bets) < p):
+                        if bk <= 0.0:
+                            traj.append(0.0)
+                        else:
+                            bk = max(0.0, bk + (lucro_win if w else -min(perda_lose, bk)))
+                            traj.append(bk)
+                    all_finals.append(traj[-1])
                     if sim_i < 20:
-                        example_trajs.append([bankroll] + traj.tolist())
+                        example_trajs.append(traj)
 
                 arr      = np.array(all_finals)
                 mean_f   = float(np.mean(arr))
