@@ -1883,63 +1883,35 @@ elif _page == "simulacao":
                 ("Resultado médio",  _smr["mean_gain"]),
                 ("Pior cenário",     _smr["worst_gain"]),
             ]
-            _smr_max_abs = max(abs(v) for _, v in _smr_items) or 1.0
-
-            rows_html = (
-                "<style>.mc-neg{color:#b03030!important;}.mc-pos{color:#1a6641!important;}</style>"
-                "<div style='font-family:Rajdhani,sans-serif;margin:12px 0 20px;'>"
-                "<div style='display:flex;align-items:center;margin-bottom:10px;'>"
-                "<div style='width:180px;min-width:180px;'></div>"
-                "<div style='flex:1;display:flex;'>"
-                "<div style='flex:1;text-align:right;padding-right:8px;"
-                "font-family:Rajdhani,sans-serif;font-size:0.85rem;font-weight:700;color:rgba(22,59,44,0.55);"
-                "letter-spacing:1px;'>← PERDA</div>"
-                "<div style='width:2px;background:#2d6a4f;height:18px;flex-shrink:0;'></div>"
-                "<div style='flex:1;padding-left:8px;"
-                "font-family:Rajdhani,sans-serif;font-size:0.85rem;font-weight:700;color:rgba(22,59,44,0.55);"
-                "letter-spacing:1px;'>GANHO →</div>"
-                "</div></div>"
+            _bar_colors = ["#1a6641" if v >= 0 else "#b03030" for _, v in _smr_items]
+            _bar_labels = [
+                f"+R$ {v:.2f}" if v >= 0 else f"−R$ {abs(v):.2f}"
+                for _, v in _smr_items
+            ]
+            _fig_div = go.Figure(go.Bar(
+                x=[v for _, v in _smr_items],
+                y=[l for l, _ in _smr_items],
+                orientation="h",
+                marker_color=_bar_colors,
+                text=_bar_labels,
+                textposition="outside",
+                textfont=dict(color=_bar_colors, size=14, family="Rajdhani"),
+                cliponaxis=False,
+            ))
+            _fig_div.update_layout(
+                height=160,
+                margin=dict(l=0, r=80, t=10, b=10),
+                paper_bgcolor="rgba(0,0,0,0)",
+                plot_bgcolor="rgba(0,0,0,0)",
+                xaxis=dict(
+                    showgrid=False, zeroline=True,
+                    zerolinecolor="#2d6a4f", zerolinewidth=2,
+                    showticklabels=False,
+                ),
+                yaxis=dict(showgrid=False, tickfont=dict(size=13, family="Rajdhani", color="#1a3d2b")),
+                showlegend=False,
             )
-            for label, value in _smr_items:
-                pct = abs(value) / _smr_max_abs * 46
-                val_str = (f"+R$ {value:.2f}" if value >= 0 else f"−R$ {abs(value):.2f}")
-                label_safe = _html.escape(label)
-                bar_color = "#1a6641" if value >= 0 else "#b03030"
-                val_color = "#1a6641" if value >= 0 else "#b03030"
-                css_cls = "mc-pos" if value >= 0 else "mc-neg"
-                if value >= 0:
-                    left_side = "<div style='flex:1;'></div>"
-                    right_side = (
-                        f"<div style='flex:1;display:flex;align-items:center;padding-left:4px;'>"
-                        f"<div style='width:{pct:.1f}%;background:{bar_color};height:26px;"
-                        f"border-radius:0 5px 5px 0;min-width:3px;'></div>"
-                        f"<span class='{css_cls}' style='margin-left:10px;font-family:Rajdhani,sans-serif;"
-                        f"font-size:0.95rem;white-space:nowrap;font-weight:700;'>{val_str}</span>"
-                        f"</div>"
-                    )
-                else:
-                    left_side = (
-                        f"<div style='flex:1;display:flex;align-items:center;justify-content:flex-end;"
-                        f"padding-right:4px;'>"
-                        f"<span class='{css_cls}' style='margin-right:10px;font-family:Rajdhani,sans-serif;"
-                        f"font-size:0.95rem;white-space:nowrap;font-weight:700;'>{val_str}</span>"
-                        f"<div style='width:{pct:.1f}%;background:{bar_color};height:26px;"
-                        f"border-radius:5px 0 0 5px;min-width:3px;'></div>"
-                        f"</div>"
-                    )
-                    right_side = "<div style='flex:1;'></div>"
-                rows_html += (
-                    f"<div style='display:flex;align-items:center;margin:10px 0;'>"
-                    f"<div style='width:180px;min-width:180px;text-align:right;font-size:0.95rem;"
-                    f"font-family:Rajdhani,sans-serif;color:#1a3d2b;padding-right:12px;line-height:1.3;font-weight:600;'>{label_safe}</div>"
-                    f"<div style='flex:1;display:flex;'>"
-                    f"{left_side}"
-                    f"<div style='width:2px;min-width:2px;background:#2d6a4f;height:28px;flex-shrink:0;'></div>"
-                    f"{right_side}"
-                    f"</div></div>"
-                )
-            rows_html += "</div>"
-            st.markdown(rows_html, unsafe_allow_html=True)
+            st.plotly_chart(_fig_div, use_container_width=True, config={"displayModeBar": False})
 
             # --- Comparação com CDI ---
             st.markdown(
