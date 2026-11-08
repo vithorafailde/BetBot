@@ -1915,7 +1915,7 @@ elif _page == "simulacao":
                 ),
                 yaxis=dict(
                     showgrid=False,
-                    tickfont=dict(size=13, family="Rajdhani", color="#1a3d2b"),
+                    tickfont=dict(size=16, family="Rajdhani", color="#1a3d2b"),
                     automargin=True,
                     autorange="reversed",
                 ),
