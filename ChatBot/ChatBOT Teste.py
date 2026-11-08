@@ -1892,7 +1892,7 @@ elif _page == "simulacao":
                 x=[v for _, v in _smr_items],
                 y=[l for l, _ in _smr_items],
                 orientation="h",
-                marker_color=_bar_colors,
+                marker=dict(color=_bar_colors, cornerradius=6),
                 text=_bar_labels,
                 textposition="outside",
                 textfont=dict(color=_bar_colors, size=13, family="Rajdhani"),
@@ -1923,7 +1923,7 @@ elif _page == "simulacao":
                     x=0.5, y=1.08, xref="paper", yref="paper",
                     xanchor="center", yanchor="bottom",
                     text="← PERDA  |  GANHO →",
-                    font=dict(size=11, family="Rajdhani", color="#4b8068"),
+                    font=dict(size=14, family="Rajdhani", color="#4b8068"),
                     showarrow=False,
                 )],
             )
