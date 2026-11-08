@@ -1886,6 +1886,7 @@ elif _page == "simulacao":
             _smr_max_abs = max(abs(v) for _, v in _smr_items) or 1.0
 
             rows_html = (
+                "<style>.mc-neg{color:#b03030!important;}.mc-pos{color:#1a6641!important;}</style>"
                 "<div style='font-family:Rajdhani,sans-serif;margin:12px 0 20px;'>"
                 "<div style='display:flex;align-items:center;margin-bottom:10px;'>"
                 "<div style='width:180px;min-width:180px;'></div>"
@@ -1905,22 +1906,23 @@ elif _page == "simulacao":
                 label_safe = _html.escape(label)
                 bar_color = "#1a6641" if value >= 0 else "#b03030"
                 val_color = "#1a6641" if value >= 0 else "#b03030"
+                css_cls = "mc-pos" if value >= 0 else "mc-neg"
                 if value >= 0:
                     left_side = "<div style='flex:1;'></div>"
                     right_side = (
-                        f"<div style='flex:1;display:flex;align-items:center;padding-left:4px;color:{val_color};'>"
+                        f"<div style='flex:1;display:flex;align-items:center;padding-left:4px;'>"
                         f"<div style='width:{pct:.1f}%;background:{bar_color};height:26px;"
                         f"border-radius:0 5px 5px 0;min-width:3px;'></div>"
-                        f"<span style='margin-left:10px;font-family:Rajdhani,sans-serif;font-size:0.95rem;"
-                        f"white-space:nowrap;font-weight:700;'>{val_str}</span>"
+                        f"<span class='{css_cls}' style='margin-left:10px;font-family:Rajdhani,sans-serif;"
+                        f"font-size:0.95rem;white-space:nowrap;font-weight:700;'>{val_str}</span>"
                         f"</div>"
                     )
                 else:
                     left_side = (
                         f"<div style='flex:1;display:flex;align-items:center;justify-content:flex-end;"
-                        f"padding-right:4px;color:{val_color};'>"
-                        f"<span style='margin-right:10px;font-family:Rajdhani,sans-serif;font-size:0.95rem;"
-                        f"white-space:nowrap;font-weight:700;'>{val_str}</span>"
+                        f"padding-right:4px;'>"
+                        f"<span class='{css_cls}' style='margin-right:10px;font-family:Rajdhani,sans-serif;"
+                        f"font-size:0.95rem;white-space:nowrap;font-weight:700;'>{val_str}</span>"
                         f"<div style='width:{pct:.1f}%;background:{bar_color};height:26px;"
                         f"border-radius:5px 0 0 5px;min-width:3px;'></div>"
                         f"</div>"
