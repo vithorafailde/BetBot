@@ -1908,19 +1908,19 @@ elif _page == "simulacao":
                 if value >= 0:
                     left_side = "<div style='flex:1;'></div>"
                     right_side = (
-                        f"<div style='flex:1;display:flex;align-items:center;padding-left:4px;'>"
+                        f"<div style='flex:1;display:flex;align-items:center;padding-left:4px;color:{val_color};'>"
                         f"<div style='width:{pct:.1f}%;background:{bar_color};height:26px;"
                         f"border-radius:0 5px 5px 0;min-width:3px;'></div>"
                         f"<span style='margin-left:10px;font-family:Rajdhani,sans-serif;font-size:0.95rem;"
-                        f"color:{val_color}!important;white-space:nowrap;font-weight:700;'>{val_str}</span>"
+                        f"white-space:nowrap;font-weight:700;'>{val_str}</span>"
                         f"</div>"
                     )
                 else:
                     left_side = (
                         f"<div style='flex:1;display:flex;align-items:center;justify-content:flex-end;"
-                        f"padding-right:4px;'>"
+                        f"padding-right:4px;color:{val_color};'>"
                         f"<span style='margin-right:10px;font-family:Rajdhani,sans-serif;font-size:0.95rem;"
-                        f"color:{val_color}!important;white-space:nowrap;font-weight:700;'>{val_str}</span>"
+                        f"white-space:nowrap;font-weight:700;'>{val_str}</span>"
                         f"<div style='width:{pct:.1f}%;background:{bar_color};height:26px;"
                         f"border-radius:5px 0 0 5px;min-width:3px;'></div>"
                         f"</div>"
