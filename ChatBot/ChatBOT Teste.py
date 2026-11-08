@@ -1912,7 +1912,7 @@ elif _page == "simulacao":
                         f"<div style='width:{pct:.1f}%;background:{bar_color};height:26px;"
                         f"border-radius:0 5px 5px 0;min-width:3px;'></div>"
                         f"<span style='margin-left:10px;font-family:Rajdhani,sans-serif;font-size:0.95rem;"
-                        f"color:{val_color};white-space:nowrap;font-weight:700;'>{val_str}</span>"
+                        f"color:{val_color}!important;white-space:nowrap;font-weight:700;'>{val_str}</span>"
                         f"</div>"
                     )
                 else:
@@ -1920,7 +1920,7 @@ elif _page == "simulacao":
                         f"<div style='flex:1;display:flex;align-items:center;justify-content:flex-end;"
                         f"padding-right:4px;'>"
                         f"<span style='margin-right:10px;font-family:Rajdhani,sans-serif;font-size:0.95rem;"
-                        f"color:{val_color};white-space:nowrap;font-weight:700;'>{val_str}</span>"
+                        f"color:{val_color}!important;white-space:nowrap;font-weight:700;'>{val_str}</span>"
                         f"<div style='width:{pct:.1f}%;background:{bar_color};height:26px;"
                         f"border-radius:5px 0 0 5px;min-width:3px;'></div>"
                         f"</div>"
@@ -1973,18 +1973,16 @@ elif _page == "simulacao":
                 f"lucro R$ {_smr['cdi_gain']:.2f} · sem risco</div></div>",
                 unsafe_allow_html=True,
             )
-            _mean_sub = (
-                f"{'ganhou' if _smr['mean_gain'] >= 0 else 'perdeu'} "
-                f"R$ {abs(_smr['mean_gain']):.2f} vs aposta"
-            )
+            _mean_sign = "+" if _smr["mean_gain"] >= 0 else ""
+            _mean_total_sub = f"total R$ {_smr['mean_f']:.2f}"
             c2.markdown(
                 f"<div style='background:{_smr_mean_bg};{_card_style}border-left:3px solid {_smr_mean_border};'>"
                 f"<div style='font-family:Rajdhani,sans-serif;font-size:0.9rem;font-weight:700;"
-                f"color:#1a3d2b;text-transform:uppercase;margin-bottom:6px;'>Ganho médio apostando</div>"
+                f"color:#1a3d2b;text-transform:uppercase;margin-bottom:6px;'>Resultado médio apostando</div>"
                 f"<div style='font-family:Rajdhani,sans-serif;font-size:1.5rem;font-weight:700;"
-                f"color:#1a3d2b;'>R$ {_smr['mean_f']:.2f}</div>"
+                f"color:{_smr_mean_color};'>R$ {_smr['mean_gain']:+.2f}</div>"
                 f"<div style='font-family:Rajdhani,sans-serif;font-size:0.85rem;color:{_smr_mean_color};margin-top:3px;'>"
-                f"{_mean_sub}</div></div>",
+                f"{_mean_total_sub}</div></div>",
                 unsafe_allow_html=True,
             )
             c3.markdown(
