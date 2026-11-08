@@ -1973,14 +1973,18 @@ elif _page == "simulacao":
                 f"lucro R$ {_smr['cdi_gain']:.2f} · sem risco</div></div>",
                 unsafe_allow_html=True,
             )
+            _mean_sub = (
+                f"{'ganhou' if _smr['mean_gain'] >= 0 else 'perdeu'} "
+                f"R$ {abs(_smr['mean_gain']):.2f} em relação ao inicial"
+            )
             c2.markdown(
                 f"<div style='background:{_smr_mean_bg};{_card_style}border-left:3px solid {_smr_mean_border};'>"
                 f"<div style='font-family:Rajdhani,sans-serif;font-size:0.9rem;font-weight:700;"
                 f"color:#1a3d2b;text-transform:uppercase;margin-bottom:6px;'>Ganho médio apostando</div>"
                 f"<div style='font-family:Rajdhani,sans-serif;font-size:1.5rem;font-weight:700;"
-                f"color:{_smr_mean_color};'>R$ {_smr['mean_gain']:+.2f}</div>"
+                f"color:#1a3d2b;'>R$ {_smr['mean_f']:.2f}</div>"
                 f"<div style='font-family:Rajdhani,sans-serif;font-size:0.85rem;color:{_smr_mean_color};margin-top:3px;'>"
-                f"sobre o total inicial</div></div>",
+                f"{_mean_sub}</div></div>",
                 unsafe_allow_html=True,
             )
             c3.markdown(
