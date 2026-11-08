@@ -1928,7 +1928,7 @@ elif _page == "simulacao":
                     showarrow=False,
                 )],
             )
-            st.plotly_chart(_fig_div, use_container_width=True, config={"displayModeBar": False})
+            st.plotly_chart(_fig_div, use_container_width=True, config={"displayModeBar": False, "staticPlot": True})
 
             # --- Comparação com CDI ---
             st.markdown(
