@@ -1903,8 +1903,8 @@ elif _page == "simulacao":
                 pct = abs(value) / _smr_max_abs * 46
                 val_str = (f"+R$ {value:.2f}" if value >= 0 else f"−R$ {abs(value):.2f}")
                 label_safe = _html.escape(label)
-                bar_color = "#1a6641" if value >= 0 else "rgba(160,40,40,0.75)"
-                val_color = "#1a6641" if value >= 0 else "rgba(160,40,40,0.9)"
+                bar_color = "#1a6641" if value >= 0 else "#b03030"
+                val_color = "#1a6641" if value >= 0 else "#b03030"
                 if value >= 0:
                     left_side = "<div style='flex:1;'></div>"
                     right_side = (
@@ -1975,7 +1975,7 @@ elif _page == "simulacao":
             )
             _mean_sub = (
                 f"{'ganhou' if _smr['mean_gain'] >= 0 else 'perdeu'} "
-                f"R$ {abs(_smr['mean_gain']):.2f} em relação ao inicial"
+                f"R$ {abs(_smr['mean_gain']):.2f} vs aposta"
             )
             c2.markdown(
                 f"<div style='background:{_smr_mean_bg};{_card_style}border-left:3px solid {_smr_mean_border};'>"
