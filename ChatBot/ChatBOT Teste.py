@@ -1888,8 +1888,16 @@ elif _page == "simulacao":
                 f"+R$ {v:.2f}" if v >= 0 else f"−R$ {abs(v):.2f}"
                 for _, v in _smr_items
             ]
+            _smr_x_min = min(v for _, v in _smr_items)
+            _smr_x_max = max(v for _, v in _smr_items)
+            _smr_x_range = max(abs(_smr_x_min), abs(_smr_x_max), 1)
+            _min_bar = _smr_x_range * 0.05
+            _bar_x = [
+                ((_min_bar if v >= 0 else -_min_bar) if abs(v) < _min_bar else v)
+                for _, v in _smr_items
+            ]
             _fig_div = go.Figure(go.Bar(
-                x=[v for _, v in _smr_items],
+                x=_bar_x,
                 y=[l for l, _ in _smr_items],
                 orientation="h",
                 marker=dict(color=_bar_colors, cornerradius=6),
@@ -1899,9 +1907,6 @@ elif _page == "simulacao":
                 cliponaxis=False,
                 hoverinfo="skip",
             ))
-            _smr_x_min = min(v for _, v in _smr_items)
-            _smr_x_max = max(v for _, v in _smr_items)
-            _smr_x_range = max(abs(_smr_x_min), abs(_smr_x_max), 1)
             _fig_div.update_layout(
                 height=200,
                 margin=dict(l=10, r=80, t=36, b=10),
