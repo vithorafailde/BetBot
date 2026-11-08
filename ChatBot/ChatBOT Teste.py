@@ -1897,6 +1897,7 @@ elif _page == "simulacao":
                 textposition="outside",
                 textfont=dict(color=_bar_colors, size=13, family="Rajdhani"),
                 cliponaxis=False,
+                hoverinfo="skip",
             ))
             _smr_x_min = min(v for _, v in _smr_items)
             _smr_x_max = max(v for _, v in _smr_items)
