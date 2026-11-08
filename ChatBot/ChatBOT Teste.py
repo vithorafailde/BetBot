@@ -1894,22 +1894,32 @@ elif _page == "simulacao":
                 orientation="h",
                 marker_color=_bar_colors,
                 text=_bar_labels,
-                textposition="outside",
-                textfont=dict(color=_bar_colors, size=14, family="Rajdhani"),
+                textposition="auto",
+                textfont=dict(color=["#ffffff" if v >= 0 else "#ffffff" for _, v in _smr_items], size=13, family="Rajdhani"),
+                insidetextanchor="middle",
                 cliponaxis=False,
             ))
             _fig_div.update_layout(
-                height=160,
-                margin=dict(l=0, r=80, t=10, b=10),
+                height=180,
+                margin=dict(l=10, r=10, t=10, b=10),
                 paper_bgcolor="rgba(0,0,0,0)",
                 plot_bgcolor="rgba(0,0,0,0)",
                 xaxis=dict(
                     showgrid=False, zeroline=True,
                     zerolinecolor="#2d6a4f", zerolinewidth=2,
                     showticklabels=False,
+                    range=[
+                        min(v for _, v in _smr_items) * 1.4,
+                        max(v for _, v in _smr_items) * 1.4 or 1,
+                    ],
                 ),
-                yaxis=dict(showgrid=False, tickfont=dict(size=13, family="Rajdhani", color="#1a3d2b")),
+                yaxis=dict(
+                    showgrid=False,
+                    tickfont=dict(size=13, family="Rajdhani", color="#1a3d2b"),
+                    automargin=True,
+                ),
                 showlegend=False,
+                uniformtext=dict(minsize=10, mode="hide"),
             )
             st.plotly_chart(_fig_div, use_container_width=True, config={"displayModeBar": False})
 
